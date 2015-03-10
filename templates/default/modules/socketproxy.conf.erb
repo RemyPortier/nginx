@@ -6,7 +6,7 @@
     add_header Strict-Transport-Security "max-age=<%= node['nginx']['sts_max_age'] %>";
     <% end -%>
 
-    listen <%= node['nginx']['port'] %> default;
+    listen <%= node['nginx']['port'] %> <%= node['nginx']['default_server'] ? node['nginx']['version'] >= '0.8.21' ? ' default_server' : ' default' : '' %>;
 
     access_log <%= node['nginx']['log_dir'] %>/<%= node['nginx']['socketproxy']['logname'] %>.access.log main;
     error_log <%= node['nginx']['log_dir'] %>/<%= node['nginx']['socketproxy']['logname'] %>.error.log debug;
