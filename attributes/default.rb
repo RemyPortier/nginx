@@ -95,7 +95,7 @@ default['nginx']['multi_accept']         = false
 default['nginx']['event']                = nil
 default['nginx']['server_tokens']        = nil
 default['nginx']['server_names_hash_bucket_size'] = 64
-default['nginx']['sendfile'] = 'on'
+default['nginx']['sendfile'] = 'off'
 
 default['nginx']['access_log_options']     = nil
 default['nginx']['error_log_options']      = nil
