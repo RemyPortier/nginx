@@ -1,11 +1,24 @@
 server {
-  listen   80;
-  server_name  <%= node['hostname'] %>;
+	listen   80;
+	server_name  <%= node['hostname'] %>;
 
-  access_log  <%= node['nginx']['log_dir'] %>/localhost.access.log;
+	access_log  <%= node['nginx']['log_dir'] %>/localhost.access.log;
 
-  location / {
-    root   <%= node['nginx']['default_root'] %>;
-    index  index.html index.htm;
-  }
+	location ~ /api/(?<path>.*) {
+
+		proxy_read_timeout 600;
+		proxy_pass <%= node['nginx']['proxy_pass'] %>;
+
+		proxy_set_header Host <%= node['nginx']['Host'] %>;
+		proxy_set_header X-Real-IP <%= node['nginx']['remote_addr'] %>;
+		proxy_set_header X-Forwarded-For <%= node['nginx']['remote_addr'] %>;
+		proxy_set_header X-Forwarded-Proto <%= node['nginx']['forwarded_proto'] %>;
+
+	}
+
+	location / {
+		root   <%= node['nginx']['default_root'] %>;
+		index  index.html index.htm;
+	}
+
 }
