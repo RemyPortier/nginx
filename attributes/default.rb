@@ -29,8 +29,12 @@ default['nginx']['dir']          = '/etc/nginx'
 default['nginx']['script_dir']   = '/usr/sbin'
 default['nginx']['log_dir']      = '/var/log/nginx'
 default['nginx']['binary']       = '/usr/sbin/nginx'
-default['nginx']['default_root'] = '/home/projects/fanga'
 default['nginx']['default_server'] = true
+default['nginx']['default_root'] = ''
+default['nginx']['proxy_pass'] = ''
+default['nginx']['Host'] = ''
+default['nginx']['remote_addr'] =''
+default['nginx']['forwarded_proto'] = ''
 
 case node['platform_family']
 when 'debian'
